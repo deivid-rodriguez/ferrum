@@ -41,7 +41,7 @@ module Ferrum
 
     def initialize(timeout, output)
       @output = output
-      super("Browser did not produce websocket url within #{timeout} seconds")
+      super("Browser did not produce websocket url within #{timeout} seconds. #{output}")
     end
   end
 
