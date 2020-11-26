@@ -70,6 +70,7 @@ module Ferrum
         tmpdir = Dir.mktmpdir("ferrum_user_data_dir_")
         ObjectSpace.define_finalizer(self, self.class.directory_remover(tmpdir))
         @user_data_dir = tmpdir
+        STDOUT.puts "options: #{options};"
         @command = Command.build(options, tmpdir)
       end
 
@@ -126,6 +127,7 @@ module Ferrum
       end
 
       def parse_ws_url(read_io, timeout)
+        STDOUT.puts "Timeout is #{timeout}"
         output = ""
         start = Ferrum.monotonic_time
         max_time = start + timeout
@@ -143,6 +145,7 @@ module Ferrum
           end
         end
 
+        STDOUT.puts "output: #{output};"
         unless ws_url
           @logger.puts(output) if @logger
           raise ProcessTimeoutError.new(timeout, output)
